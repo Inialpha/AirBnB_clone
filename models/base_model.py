@@ -32,12 +32,3 @@ class BaseModel:
         my_dict['updated_at'] = self.updated_at.isoformat()
         my_dict['created_at'] = self.created_at.isoformat()
         return my_dict
-
-
-"""base = BaseModel()
-print(base)
-print(type(base))
-print(base.id)
-print(base.created_at)
-print(base.updated_at)
-print(base.to_dict())"""
