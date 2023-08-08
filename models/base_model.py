@@ -4,6 +4,7 @@ the BaseModel class inherited by all other major class in the project"""
 
 from datetime import datetime
 from uuid import uuid4
+import models
 
 
 class BaseModel:
@@ -16,7 +17,8 @@ class BaseModel:
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
-            self.updated_at = self.created_at
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """prints the representation of the object"""
@@ -26,6 +28,7 @@ class BaseModel:
     def save(self):
         """update the updated_at instance attribute"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """return the dictionary representation of an object"""
@@ -41,7 +44,7 @@ class BaseModel:
             dict representation
         """
         for attr, value in kwargs.items():
-            if attr == 'update_at' or attr == 'created_at':
+            if attr == 'updated_at' or attr == 'created_at':
                 setattr(self, attr, datetime.fromisoformat(value))
             elif attr == '__class__':
                 pass
