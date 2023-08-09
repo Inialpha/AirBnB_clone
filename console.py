@@ -2,6 +2,12 @@
 
 """ program entry point """
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 import cmd
 import models
 import sys
@@ -9,7 +15,8 @@ import sys
 
 class HBNBCommand(cmd.Cmd):
 
-    all_classes = ["BaseModel", "User"]
+    all_classes = ["BaseModel", "User", "Place", "State", "City",
+                   "Amenity", "Review"]
     prompt = '(hbnb) '
 
     def do_quit(self, line):
