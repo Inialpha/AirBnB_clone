@@ -2,6 +2,7 @@
 
 import unittest
 import os
+import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models import storage
@@ -19,26 +20,29 @@ class TestFileStorage(unittest.TestCase):
         all_objs = storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            self.assertIsNone(obj)
-        self.assertFalse(os.path.isfile('file.json'))
+            self.assertIsNotNone(obj)
+        self.assertTrue(os.path.isfile('file.json'))
     
     def test_new_storage(self):
         """ a method that test new storage functionality """
         key = self.my_model.id
-        self.assertIsNotNone(self.my_model[key])
-        self.assertTrue(type(self.my_model[key]), dict)
+        stored_obj = storage.all()
+        model = stored_obj.get(type(self.my_model).__name__ + '.' + key)
+        self.assertIsNotNone(model)
+        self.assertEqual(model, self.my_model)
+        self.assertTrue(type(model), type(self.my_model))
 
 
     def test_save_to_storage(self):
         """ a method that test if it's saved to storage """
         self.my_model.save()
         with open('file.json', 'r') as file:
-            file_content = f.read()
+            file_content = file.read()
         self.assertTrue(os.path.isfile('file.json'))
-        self.assertIsNotNone(my_model)
+        self.assertIsNotNone(self.my_model)
         self.assertIn(self.check_json_file(file_content), [True, False])
 
-    def check_json_file(content):
+    def check_json_file(self, content):
         """ check if the content of a file is json """
         try:
             json.loads(content)
@@ -52,7 +56,7 @@ class TestFileStorage(unittest.TestCase):
         for obj in objs.keys():
             inst = objs[obj]
             self.assertIsNotNone(obj)
-            self.assertFalse(inst, dict)
+            self.assertTrue(inst, dict)
         self.assertTrue(os.path.isfile('file.json'))
 
 

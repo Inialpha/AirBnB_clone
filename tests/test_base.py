@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
+from datetime import datetime
 from models.base_model import BaseModel
 
 """ a test file that checks all methods """
@@ -14,11 +15,11 @@ class TestBase(unittest.TestCase):
 
     def test_public_attribute(self):
         """ a method that test attribute """
-        self.assertIsNotNone(self.mybase.id)
-        self.assertEqual(self.my_base.name)
+        self.assertIsNotNone(self.my_base.id)
+        self.assertEqual(self.my_base.name, 'First Model')
         self.assertEqual(self.my_base.my_number, 89)
-        self.assertIsInstance(self.my_base.createdat, datetime)
-        self.assertEqual(self.my_base.createdat, self.my_base.updatedat)
+        self.assertIsInstance(self.my_base.created_at, datetime)
+        self.assertFalse(self.my_base.created_at is self.my_base.updated_at)
 
     def test_recreate_method(self):
         """ a method that test if a dictionary was supplied """
@@ -36,8 +37,14 @@ class TestBase(unittest.TestCase):
     def test_to_dictionary(self):
         """ a method that test convertion to dictionary """
         base_dict = self.my_base.to_dict()
-        for key, value in base_dict:
-            self.assertEqual(getattr(self.my_base, key), value)
+        for key, value in base_dict.items():
+            if key == 'created_at' or key == 'updated_at':
+                self.assertEqual(getattr(self.my_base, key),
+                                 datetime.fromisoformat(value))
+            elif key == '__class__':
+                pass
+            else:
+                self.assertEqual(getattr(self.my_base, key), value)
         self.assertIsInstance(base_dict, dict)
 
 
