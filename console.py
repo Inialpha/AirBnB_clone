@@ -2,14 +2,20 @@
 
 """ program entry point """
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 import cmd
-import models
 import sys
 
 
 class HBNBCommand(cmd.Cmd):
 
-    all_classes = ["BaseModel", "User"]
+    all_classes = ["BaseModel", "User", "Place", "State", "City",
+                   "Amenity", "Review"]
     prompt = '(hbnb) '
 
     def do_quit(self, line):
@@ -130,5 +136,12 @@ class HBNBCommand(cmd.Cmd):
             new_line = _cmd + " " + _class
             return new_line
         return line
+
+    def do_count(self, cls):
+        """ Retrieves the number of instances of a class """
+        if cls:
+            print(count)
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
