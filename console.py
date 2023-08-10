@@ -9,7 +9,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 import cmd
-import models
 import sys
 
 
@@ -126,6 +125,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             print("** class doesn't exist **")
+
+    def do_count(self, cls):
+        """ Retrieves the number of instances of a class """
+        if cls:
+            print(count)
 
 
 if __name__ == '__main__':
