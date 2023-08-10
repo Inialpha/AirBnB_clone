@@ -8,8 +8,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-import cmd
-import sys
+import cmd, sys, models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -126,10 +125,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_count(self, cls):
-        """ Retrieves the number of instances of a class """
-        if cls:
-            print(count)
+    def do_User_count(self, line):
+        """ Count the number of instance of a class """
+        count = 0
+        all_obj = models.storage.all()
+        print(all_obj)
+        for instance in all_obj.values():
+            if isinstance(instance, User):
+                count += 1
+        print(count)
 
 
 if __name__ == '__main__':
