@@ -153,11 +153,6 @@ class HBNBCommand(cmd.Cmd):
             return str(new_line)
         return line
 
-    def do_count(self, cls):
-        """ Retrieves the number of instances of a class """
-        if cls:
-            print(count)
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
