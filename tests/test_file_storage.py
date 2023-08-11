@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-import unittest
-import os
-import json
+import unittest, os, json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models import storage
