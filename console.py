@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """ program entry point """
 from models.base_model import BaseModel
 from models.user import User
@@ -8,7 +7,9 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import models
 import cmd
+from shlex import split
 import sys
 
 
@@ -47,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation
         of an instance based on the class name"""
-        args = arg.split()
+        args = split(arg)
         if len(args) == 0:
             print("** class name missing **")
         elif len(args) == 1:
@@ -64,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
-        args = arg.split()
+        args = split(arg)
 
         if len(args) == 0:
             print("** class name missing **")
@@ -103,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the
         class name and id by adding or updating attribute"""
 
-        args = arg.split()
+        args = split(arg)
         if len(args) == 0:
             print("** class name missing **")
         elif len(args) == 1:
@@ -120,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
                     a_type = type(getattr(my_dict[key], args[2]))
                     args[3] = a_type(args[3])
                 setattr(my_dict[key], args[2], args[3])
-                models.storage.save()
+                my_dict[key].save()
             else:
                 print("** no instance found **")
         else:
@@ -128,13 +129,28 @@ class HBNBCommand(cmd.Cmd):
     
     def precmd(self, line):
         """precmd method"""
-        _parts = line.split('.', 1)
-        if len(_parts) == 2:
-            _class = _parts[0]
-            _args = _parts[1].split('(', 1)
-            _cmd = _args[0]
-            new_line = _cmd + " " + _class
-            return new_line
+        parts = line.split('.', 1)
+        if len(parts) == 2:
+            a_class = parts[0]
+            args = parts[1].split('(', 1)
+            cmd = args[0]
+            new_line = cmd + " " + a_class
+            if len(args) == 2:
+                args = args[1].split(')', 1)
+                args = args[0].split(",")
+                a_id = args[0].strip()
+                new_line = cmd + " " + a_class + " " + a_id
+                if len(args) > 1:
+                    print(a_id)
+                    others = args[1:]
+                    s = ""
+                    for c in others:
+                        s += c
+                    s = s.replace("\"", "")
+                    print(s)
+                    new_line = cmd + " " + a_class + " " + a_id + " " + s
+
+            return str(new_line)
         return line
 
     def do_count(self, cls):
