@@ -124,14 +124,24 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             print("** class doesn't exist **")
+    
+    def precmd(self, line):
+        """precmd method"""
+        _parts = line.split('.', 1)
+        if len(_parts) == 2:
+            _class = _parts[0]
+            _args = _parts[1].split('(', 1)
+            _cmd = _args[0]
+            new_line = _cmd + " " + _class
+            return new_line
+        return line
 
     def do_User_count(self, line):
         """ Count the number of instance of a class """
         count = 0
         all_obj = models.storage.all()
-        print(all_obj)
-        for instance in all_obj.values():
-            if isinstance(instance, User):
+        for instance in all_obj.keys():
+            if instance == 'User':
                 count += 1
         print(count)
 
