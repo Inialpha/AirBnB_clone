@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """module for the console test cases"""
-import console
+from . import console
 from console import HBNBCommand
 import unittest
 import io

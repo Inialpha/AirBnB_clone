@@ -4,6 +4,7 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 import os
+import sys
 
 
 class FileStorage:
@@ -37,4 +38,5 @@ class FileStorage:
             with open(self.__file_path, "r") as f:
                 my_dict = json.load(f)
                 for key, value in my_dict.items():
-                    self.__objects[key] = eval(value['__class__'])(**value)
+                    my_class = getattr(sys.modules[__name__], value['__class__'])
+                    self.__objects[key] = my_class(**value)

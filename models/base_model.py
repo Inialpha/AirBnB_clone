@@ -4,7 +4,7 @@ the BaseModel class inherited by all other major class in the project"""
 
 from datetime import datetime
 from uuid import uuid4
-
+import models
 
 class BaseModel:
     """BaseModel class serve as a base class for all class"""
