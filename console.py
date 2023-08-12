@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" program entry point """
+""" program entry point to use developed methods"""
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State

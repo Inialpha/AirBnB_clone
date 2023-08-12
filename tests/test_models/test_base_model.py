@@ -1,14 +1,17 @@
 #!/usr/bin/python3
+"""a test module for the base models that checks all methods in the class"""
 
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
-""" a test file that checks all methods """
-
-
 class TestBase(unittest.TestCase):
-    """ a test for the base class """
+    """ A test for the base class
+        Attributes:
+            public_attributes: tested
+        Methods:
+            to_dict: tested to dictionary method
+    """
     my_base = BaseModel()
     my_base.name = "First Model"
     my_base.my_number = 89
