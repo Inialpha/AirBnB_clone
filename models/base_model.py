@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" This is the base module which contain
-    the BaseModel class inherited by all other major class in the project
+""" This is the base module which contain inherited by all other major class
+    the project
 """
 
 from datetime import datetime
@@ -9,7 +9,7 @@ import models
 
 
 class BaseModel:
-    """ BaseModel class serve as a base class for all class
+    """BaseModel class serve as a base class for all class
         Method:
             save: a method that update an instances attribute
             to_dict: a method that return dictionary representation of an
@@ -21,9 +21,8 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """class constructor with public instances:
-            id: unique identification
-            created_at: datetime stamp
-            updated_at: datetime stamp
+            *args: contain list of argument
+            **kwargs: a dictionary representation of class
         """
         if len(kwargs) > 0:
             self.__recreate_method(**kwargs)
@@ -52,7 +51,7 @@ class BaseModel:
         return my_dict
 
     def __recreate_method(self, **kwargs):
-        """ a private method that recreates an instance with
+        """a private method that recreates an instance with
             dict representation
         """
         for attr, value in kwargs.items():
