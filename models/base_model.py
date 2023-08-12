@@ -21,7 +21,10 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """class constructor with public instances id, created_at, updated_at"""
+        """class constructor with public instances:
+            id
+            created_at
+            updated_at"""
         if len(kwargs) > 0:
             self.__recreate_method(**kwargs)
         else:
