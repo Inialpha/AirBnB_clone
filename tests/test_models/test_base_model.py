@@ -8,7 +8,12 @@ from models.base_model import BaseModel
 
 
 class TestBase(unittest.TestCase):
-    """ a test for the base class """
+    """ A test for the base class
+        Attributes:
+            public_attributes: tested
+        Methods:
+            to_dict: tested to dictionary method
+    """
     my_base = BaseModel()
     my_base.name = "First Model"
     my_base.my_number = 89
