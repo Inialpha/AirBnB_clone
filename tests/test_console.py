@@ -6,7 +6,7 @@ import unittest
 import io
 
 
-class TestConsole(unittest.TestCases):
+class TestConsole(unittest.TestCase):
     """Test cases for the console"""
 
 #    def setUp(self):

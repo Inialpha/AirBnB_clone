@@ -1,35 +1,39 @@
 #!/usr/bin/python3
 
-import unittest, os, json
+import unittest
+import os
+import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-from models import storage
 
 
 class TestFileStorage(unittest.TestCase):
     """ Test Class for FileStorage """
-    
     my_model = BaseModel()
     my_model.name = "My_First_Model"
     my_model.my_number = 89
 
+    def setUp(self):
+        """ setting up the storage file in init """
+        self.storage = FileStorage()
+        self.storage.reload()
+
     def test_all_empty_storage(self):
         """ a method that test all storage functionality """
-        all_objs = storage.all()
+        all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
             self.assertIsNotNone(obj)
         self.assertTrue(os.path.isfile('file.json'))
-    
+
     def test_new_storage(self):
         """ a method that test new storage functionality """
         key = self.my_model.id
-        stored_obj = storage.all()
+        stored_obj = self.storage.all()
         model = stored_obj.get(type(self.my_model).__name__ + '.' + key)
         self.assertIsNotNone(model)
         self.assertEqual(model, self.my_model)
         self.assertTrue(type(model), type(self.my_model))
-
 
     def test_save_to_storage(self):
         """ a method that test if it's saved to storage """
@@ -50,7 +54,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload_from_file(self):
         """ a method that test reload functionality """
-        objs = storage.all()
+        objs = self.storage.all()
         for obj in objs.keys():
             inst = objs[obj]
             self.assertIsNotNone(obj)

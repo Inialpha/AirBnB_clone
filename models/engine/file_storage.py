@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """module for FileStorage class"""
 import json
+import os
 from models.base_model import BaseModel
 from models.user import User
-import os
 
 
 class FileStorage:
@@ -34,7 +34,16 @@ class FileStorage:
     def reload(self):
         """deserializes the JSON file to __objects"""
         if os.path.isfile(self.__file_path):
+            class_map = {
+                    'BaseModel': BaseModel,
+                    'User': User,
+                    }
             with open(self.__file_path, "r") as f:
                 my_dict = json.load(f)
                 for key, value in my_dict.items():
-                    self.__objects[key] = eval(value['__class__'])(**value)
+                    class_name = value['__class__']
+                    if class_name in class_map:
+                        cls = class_map[class_name]
+                        self.__objects[key] = cls(**value)
+                    else:
+                        pass

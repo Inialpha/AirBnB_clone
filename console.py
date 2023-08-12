@@ -7,7 +7,9 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-import cmd, sys, models
+import cmd
+import sys
+import models
 from shlex import split
 
 
@@ -124,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             print("** class doesn't exist **")
-    
+
     def precmd(self, line):
         """precmd method"""
         parts = line.split('.', 1)
