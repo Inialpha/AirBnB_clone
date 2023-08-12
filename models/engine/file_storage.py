@@ -4,6 +4,11 @@ import json
 import os
 from models.base_model import BaseModel
 from models.user import User
+<<<<<<< HEAD
+=======
+import os
+import sys
+>>>>>>> Initech
 
 
 class FileStorage:
@@ -50,9 +55,14 @@ class FileStorage:
             with open(self.__file_path, "r") as f:
                 my_dict = json.load(f)
                 for key, value in my_dict.items():
+<<<<<<< HEAD
                     class_name = value['__class__']
                     if class_name in class_map:
                         cls = class_map[class_name]
                         self.__objects[key] = cls(**value)
                     else:
                         pass
+=======
+                    my_class = getattr(sys.modules[__name__], value['__class__'])
+                    self.__objects[key] = my_class(**value)
+>>>>>>> Initech
