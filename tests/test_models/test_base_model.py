@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-
-""" a test module for the base models
-    that checks all methods in the class
-"""
+"""a test module for the base models that checks all methods in the class"""
 
 import unittest
 from datetime import datetime
