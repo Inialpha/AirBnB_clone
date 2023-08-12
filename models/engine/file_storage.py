@@ -4,11 +4,12 @@ import json
 import os
 from models.base_model import BaseModel
 from models.user import User
-<<<<<<< HEAD
-=======
-import os
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.state import State
+from models.review import Review
 import sys
->>>>>>> Initech
 
 
 class FileStorage:
@@ -48,21 +49,9 @@ class FileStorage:
     def reload(self):
         """deserializes the JSON file to __objects"""
         if os.path.isfile(self.__file_path):
-            class_map = {
-                    'BaseModel': BaseModel,
-                    'User': User,
-                    }
             with open(self.__file_path, "r") as f:
                 my_dict = json.load(f)
                 for key, value in my_dict.items():
-<<<<<<< HEAD
-                    class_name = value['__class__']
-                    if class_name in class_map:
-                        cls = class_map[class_name]
-                        self.__objects[key] = cls(**value)
-                    else:
-                        pass
-=======
-                    my_class = getattr(sys.modules[__name__], value['__class__'])
+                    name = sys.modules[__name__]
+                    my_class = getattr(name, value['__class__'])
                     self.__objects[key] = my_class(**value)
->>>>>>> Initech

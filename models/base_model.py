@@ -5,10 +5,7 @@ the BaseModel class inherited by all other major class in the project"""
 from datetime import datetime
 from uuid import uuid4
 import models
-<<<<<<< HEAD
 
-=======
->>>>>>> Initech
 
 class BaseModel:
     """ BaseModel class serve as a base class for all class
@@ -17,7 +14,7 @@ class BaseModel:
             to_dict: a method that return dictionary representation of an
                 object
         Private method:
-            __recreate_method: a private method that recreate instance of a 
+            __recreate_method: a private method that recreate instance of a
             dictionary representation
         Magic method:
             __str__: a magic method that print a class as a string
