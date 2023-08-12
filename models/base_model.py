@@ -8,7 +8,17 @@ import models
 
 
 class BaseModel:
-    """BaseModel class serve as a base class for all class"""
+    """ BaseModel class serve as a base class for all class
+        Public methods:
+            save: a method that update an instances attribute
+            to_dict: a method that return dictionary representation of an
+                object
+        Private method:
+            __recreate_method: a private method that recreate instance of a 
+            dictionary representation
+        Magic method:
+            __str__: a magic method that print a class as a string
+    """
 
     def __init__(self, *args, **kwargs):
         """class constructor"""
