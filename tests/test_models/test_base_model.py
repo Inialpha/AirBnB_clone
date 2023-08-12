@@ -5,6 +5,7 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class TestBase(unittest.TestCase):
     """ A test for the base class
         Attributes:
@@ -15,6 +16,21 @@ class TestBase(unittest.TestCase):
     my_base = BaseModel()
     my_base.name = "First Model"
     my_base.my_number = 89
+
+    def test_kwargs(self):
+        """Test kwargs in models """
+        diction = {'id': '234', 'name': 'Base Model', 'my_number': 34,
+                   'updated_at': str(datetime.now()),
+                   'created_at': str(datetime.now())}
+        custom_base = BaseModel(**diction)
+        self.assertEqual(custom_base.id, '234')
+        self.assertEqual(custom_base.name, 'Base Model')
+        self.assertEqual(custom_base.my_number, 34)
+
+    def test_output(self):
+        """ test string representation of class """
+        expect_out = str(self.my_base)
+        self.assertEqual(str(self.my_base), expect_out)
 
     def test_public_attribute(self):
         """ a method that test attribute """
