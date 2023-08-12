@@ -15,14 +15,17 @@ class BaseModel:
             to_dict: a method that return dictionary representation of an
                 object
         Private method:
-            __recreate_method: a private method that recreate instance of a 
+            __recreate_method: a private method that recreate instance of a
             dictionary representation
         Magic method:
             __str__: a magic method that print a class as a string
     """
 
     def __init__(self, *args, **kwargs):
-        """class constructor"""
+        """class constructor with public instances:
+            id
+            created_at
+            updated_at"""
         if len(kwargs) > 0:
             self.__recreate_method(**kwargs)
         else:
