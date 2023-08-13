@@ -43,7 +43,11 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """Return the dictionary representation of an object"""
+        """a method that convert to dictionary
+
+            Return:
+                the dictionary representation of an object
+        """
         my_dict = self.__dict__.copy()
         my_dict['__class__'] = self.__class__.__name__
         my_dict['updated_at'] = self.updated_at.isoformat()

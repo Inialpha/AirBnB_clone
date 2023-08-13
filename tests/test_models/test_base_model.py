@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 import os
 
 
+
 class TestBase(unittest.TestCase):
     """ A test for the base class
         Attributes:
@@ -43,12 +44,18 @@ class TestBase(unittest.TestCase):
         self.assertIsNotNone(self.my_base.updated_at)
         self.assertIsInstance(self.my_base.updated_at, datetime)
 
+    def test_output(self):
+        """ test string representation of class """
+        expect_out = str(self.my_base)
+        self.assertEqual(str(self.my_base), expect_out)
+
     def test_public_attribute(self):
         """ a method that test attribute """
         self.assertEqual(self.my_base.name, 'First Model')
         self.assertEqual(self.my_base.my_number, 89)
         self.assertFalse(self.my_base.created_at is self.my_base.updated_at)
 
+<<<<<<< HEAD
     def test_save(self):
         """test the save method"""
         self.my_base.save()
@@ -61,6 +68,9 @@ class TestBase(unittest.TestCase):
         self.assertEqual(str(self.my_base), my_str)
 
     def test_recreate_method(self):
+=======
+    def test_kwargs_method(self):
+>>>>>>> 8b792ba484f7e161bd323773fa799a9b18ca8c08
         """ a method that test if a dictionary was supplied """
         my_json_base = self.my_base.to_dict()
         new_base = BaseModel(**my_json_base)
