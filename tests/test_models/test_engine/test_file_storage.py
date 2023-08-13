@@ -66,7 +66,7 @@ class TestFileStorage(unittest.TestCase):
         except json.JSONDecodeError:
             return False
 
-    def test_reload_from_file(self):
+    def test_reload(self):
         """ a method that test reload functionality """
         objs = self.storage.all()
         for obj in objs.keys():
