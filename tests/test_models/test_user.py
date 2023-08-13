@@ -46,6 +46,12 @@ class TestUser(unittest.TestCase):
         my_dict = self.my_user.to_dict()
         self.assertIsInstance(my_dict, dict)
 
+    def test_str(self):
+        """test str method"""
+        my_str = "[{}] ({}) {}".format(self.my_user.__class__.__name__,
+                                       self.my_user.id, self.my_user.__dict__)
+        self.assertEqual(str(self.my_user), my_str)
+
     def test_save(self):
         """test the save method"""
         self.my_user.save()
