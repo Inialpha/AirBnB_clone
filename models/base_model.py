@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""This is the base module which contain
-the BaseModel class inherited by all other major class in the project"""
+""" This is the base module which contain inherited by all other major class
+    the project
+"""
 
 from datetime import datetime
 from uuid import uuid4
@@ -8,10 +9,21 @@ import models
 
 
 class BaseModel:
-    """BaseModel class serve as a base class for all class"""
+    """BaseModel class serve as a base class for all class
+        Method:
+            save: a method that update an instances attribute
+            to_dict: a method that return dictionary representation of an
+                object
+            __recreate_method: a private method that recreate instance of a
+            dictionary representation
+            __str__: a magic method that print a class as a string
+    """
 
     def __init__(self, *args, **kwargs):
-        """class constructor"""
+        """class constructor with public instances:
+            *args: contain list of argument
+            **kwargs: a dictionary representation of class
+        """
         if len(kwargs) > 0:
             self.__recreate_method(**kwargs)
         else:
@@ -31,8 +43,11 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """return the dictionary representation of an object"""
+        """a method that convert to dictionary
 
+            Return:
+                the dictionary representation of an object
+        """
         my_dict = self.__dict__.copy()
         my_dict['__class__'] = self.__class__.__name__
         my_dict['updated_at'] = self.updated_at.isoformat()
@@ -40,7 +55,7 @@ class BaseModel:
         return my_dict
 
     def __recreate_method(self, **kwargs):
-        """ a private method that recreates an instance with
+        """a private method that recreates an instance with
             dict representation
         """
         for attr, value in kwargs.items():

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""init module"""
+"""A Module that defines all common attributes/ method for other classes"""
 from models.engine.file_storage import FileStorage
 
 

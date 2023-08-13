@@ -1,22 +1,14 @@
 #!/usr/bin/python3
-"""module for the console test cases"""
-import console
+"""Testing the console, for all features!"""
+
+
+from unittest.mock import patch
+from io import StringIO
 from console import HBNBCommand
-import unittest
-import io
+
+with patch('sys.stdout', new=StringIO()) as f:
+    HBNBCommand().onecmd("help show")
 
 
-class TestConsole(unittest.TestCase):
-    """Test cases for the console"""
-
-#    def setUp(self):
-#       """sets up for each test"""
-#
-#       self.output = io.StringIO()
-#       sys.stdout = self.output
-
-    def test_create(self):
-        """test create command"""
-        with patch("sys.stdout", new=StringIO()) as f:
-            HBNBCommand().onecmd("help show")
-            self.assertTrue(len(f.getvalue() > 0))
+if __name__ == '__main__':
+    HBNBCommand().unittest()

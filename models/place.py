@@ -4,7 +4,15 @@ from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """Place class"""
+    """ Place Class that inherits the Base Model
+        Public method:
+            city_id: a class attribute that stores city id
+            user_id: a class attribute that sotres user id
+            name: a class attribute that stores name of place
+            description: a class attribute that stores description
+            number_rooms: a class attribute that stores number of rooms
+            number_bathrooms: a class attribute that stores number of bathrms
+    """
 
     city_id = ""
     user_id = ""

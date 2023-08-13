@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" program entry point """
+""" program entry point to use developed methods"""
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -14,6 +14,16 @@ from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
+    """ A class that inherit that the cmd class to create a console
+        Public attr:
+            all_classes: stores the name of all the classes
+            prompt: customized the console template
+        Public method:
+            do_quit: to exit from the console
+            do_emptyline: to pass if an empty line is encountered
+            do_EOF: set to true to exit when control + D is pressed
+            do_create: a method that create or instantiate a class
+    """
 
     all_classes = ["BaseModel", "User", "Place", "State", "City",
                    "Amenity", "Review"]
