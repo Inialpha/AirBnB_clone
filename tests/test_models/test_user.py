@@ -51,21 +51,25 @@ class TestUser(unittest.TestCase):
         self.my_user.save()
         self.assertTrue(os.path.exists("file.json"))
 
-    def test_user_class_attribute(self):
+    def test_first_name(self):
         """ Testing class attribute if has attribute """
         self.my_user.first_name = 'Betty'
-        self.my_user.last_name = 'Bar'
-        self.my_user.email = 'airbnb@mail.com'
-        self.my_user.password = 'root'
         self.assertEqual(self.my_user.first_name, 'Betty')
-        self.assertEqual(self.my_user.last_name, 'Bar')
-        self.assertEqual(self.my_user.email, 'airbnb@mail.com')
-        self.assertEqual(self.my_user.password, 'root')
 
-        """ Testing check if dictionary was create when save was called """
-        self.my_user.save()
-        self.assertIsNotNone(self.my_user.created_at)
-        self.assertTrue(type(self.my_user), dict)
+    def test_last_name(self):
+        """test last name"""
+        self.my_user.last_name = 'Bar'
+        self.assertEqual(self.my_user.last_name, 'Bar')
+
+    def test_email(self):
+        """test email"""
+        self.my_user.email = 'airbnb@mail.com'
+        self.assertEqual(self.my_user.email, 'airbnb@mail.com')
+
+    def test_password(self):
+        """test password"""
+        self.my_user.password = 'root'
+        self.assertEqual(self.my_user.password, 'root')
 
 
 if __name__ == '__main__':
