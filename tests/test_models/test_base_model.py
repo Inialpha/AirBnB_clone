@@ -43,11 +43,6 @@ class TestBase(unittest.TestCase):
         self.assertIsNotNone(self.my_base.updated_at)
         self.assertIsInstance(self.my_base.updated_at, datetime)
 
-    def test_output(self):
-        """ test string representation of class """
-        expect_out = str(self.my_base)
-        self.assertEqual(str(self.my_base), expect_out)
-
     def test_public_attribute(self):
         """ a method that test attribute """
         self.assertEqual(self.my_base.name, 'First Model')
@@ -64,7 +59,11 @@ class TestBase(unittest.TestCase):
         my_str = "[{}] ({}) {}".format(self.my_base.__class__.__name__,
                                        self.my_base.id, self.my_base.__dict__)
         self.assertEqual(str(self.my_base), my_str)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 80c5be6c305a1552ce766ee6f31cc789e40e971a
     def test_kwargs_method(self):
         """ a method that test if a dictionary was supplied """
         my_json_base = self.my_base.to_dict()
