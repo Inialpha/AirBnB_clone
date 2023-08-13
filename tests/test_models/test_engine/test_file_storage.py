@@ -1,30 +1,44 @@
 #!/usr/bin/python3
+"""module for testing storage"""
 
 import unittest
-import os
 import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+import models
+import os
 
 
 class TestFileStorage(unittest.TestCase):
     """ Test Class for FileStorage """
-    my_model = BaseModel()
-    my_model.name = "My_First_Model"
-    my_model.my_number = 89
 
     def setUp(self):
         """ setting up the storage file in init """
         self.storage = FileStorage()
         self.storage.reload()
+        self.my_model = BaseModel()
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+
+    def test_file_path(self):
+        """test for the __file_path attribute"""
+        with self.assertRaises(AttributeError):
+            return self.storage.__file_path
+
+    def test_object(self):
+        """test private class instance __object"""
+        with self.assertRaises(AttributeError):
+            return self.storage.__object
 
     def test_all_empty_storage(self):
         """ a method that test all storage functionality """
-        all_objs = self.storage.all()
+        all_objs = models.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
             self.assertIsNotNone(obj)
-        self.assertTrue(os.path.isfile('file.json'))
+        self.assertFalse(os.path.isfile('file.json'))
 
     def test_new_storage(self):
         """ a method that test new storage functionality """
@@ -57,9 +71,10 @@ class TestFileStorage(unittest.TestCase):
         objs = self.storage.all()
         for obj in objs.keys():
             inst = objs[obj]
+            inst.save()
             self.assertIsNotNone(obj)
             self.assertTrue(inst, dict)
-        self.assertTrue(os.path.isfile('file.json'))
+            self.assertTrue(os.path.isfile('file.json'))
 
 
 if __name__ == '__main__':

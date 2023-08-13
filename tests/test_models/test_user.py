@@ -1,16 +1,24 @@
 #!/usr/bin/python3
+"""module for user unittest"""
 
 import unittest
 import models
 from models.base_model import BaseModel
 from models.user import User
 from models.engine.file_storage import FileStorage
+import os
 
 
 class TestUser(unittest.TestCase):
     """ testing class attributes """
 
-    my_user = User()
+    def setUp(self):
+        """the setup method"""
+        self.my_user = User()
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
 
     def test_user_class_type(self):
         """ Testing class attribute data types """
