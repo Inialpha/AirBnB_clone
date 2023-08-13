@@ -13,20 +13,6 @@ import os
 class TestFileStorage(unittest.TestCase):
     """ Test Class for FileStorage """
 
-    @classmethod
-    def setUpClass(cls):
-        """set up for test"""
-        cls.user = User()
-        cls.user.first_name = "Kev"
-        cls.user.last_name = "Yo"
-        cls.user.email = "1234@yahoo.com"
-        cls.storage = FileStorage()
-
-    @classmethod
-    def teardown(cls):
-        """at the end of the test this will tear it down"""
-        del cls.user
-
     def setUp(self):
         """ setting up the storage file in init """
         self.storage = FileStorage()
