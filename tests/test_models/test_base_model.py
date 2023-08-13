@@ -4,6 +4,8 @@
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
+import os
+
 
 class TestBase(unittest.TestCase):
     """ A test for the base class
@@ -12,17 +14,51 @@ class TestBase(unittest.TestCase):
         Methods:
             to_dict: tested to dictionary method
     """
-    my_base = BaseModel()
-    my_base.name = "First Model"
-    my_base.my_number = 89
+    def setUp(self):
+        """setup method"""
+        self.my_base = BaseModel()
+        self.my_base.name = "First Model"
+        self.my_base.my_number = 89
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+
+    def test_instance(self):
+        """check if is instance"""
+        self.assertTrue(isinstance(self.my_base, BaseModel))
+
+    def test_id(self):
+        """test for id"""
+        self.assertIsNotNone(self.my_base.id)
+        self.assertTrue(isinstance(self.my_base.id, str))
+
+    def test_created_at(self):
+        """test created_at"""
+        self.assertIsNotNone(self.my_base.created_at)
+        self.assertIsInstance(self.my_base.created_at, datetime)
+
+    def test_updated_at(self):
+        """test updated_at"""
+        self.assertIsNotNone(self.my_base.updated_at)
+        self.assertIsInstance(self.my_base.updated_at, datetime)
 
     def test_public_attribute(self):
         """ a method that test attribute """
-        self.assertIsNotNone(self.my_base.id)
         self.assertEqual(self.my_base.name, 'First Model')
         self.assertEqual(self.my_base.my_number, 89)
-        self.assertIsInstance(self.my_base.created_at, datetime)
         self.assertFalse(self.my_base.created_at is self.my_base.updated_at)
+
+    def test_save(self):
+        """test the save method"""
+        self.my_base.save()
+        self.assertTrue(os.path.exists("file.json"))
+
+    def test_str_(self):
+        """test the str method"""
+        my_str = "[{}] ({}) {}".format(self.my_base.__class__.__name__,
+                                       self.my_base.id, self.my_base.__dict__)
+        self.assertEqual(str(self.my_base), my_str)
 
     def test_recreate_method(self):
         """ a method that test if a dictionary was supplied """
@@ -37,7 +73,7 @@ class TestBase(unittest.TestCase):
         self.assertFalse(self.my_base is new_base)
         self.assertIsNotNone(new_base.id)
 
-    def test_to_dictionary(self):
+    def test_to_dict(self):
         """ a method that test convertion to dictionary """
         base_dict = self.my_base.to_dict()
         for key, value in base_dict.items():
