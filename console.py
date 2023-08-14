@@ -122,16 +122,18 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 2:
             print("** attribute name missing **")
         elif len(args) == 3:
-            print("** value missing **")
+            print("** attribute value missing **")
+        elif len(args) == 5:
+            print("** dictionary usage **")
         elif args[0] in self.all_classes:
-            key = args[0] + "." + args[1]
+            key = args[0] + '.' + args[1]
             my_dict = models.storage.all()
             if key in my_dict:
                 if hasattr(my_dict[key], args[2]):
                     a_type = type(getattr(my_dict[key], args[2]))
                     args[3] = a_type(args[3])
-                setattr(my_dict[key], args[2], args[3])
-                my_dict[key].save()
+                    setattr(my_dict[key], args[2], args[3])
+                    my_dict[key].save()
             else:
                 print("** no instance found **")
         else:
@@ -166,7 +168,6 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, arg):
         """ Count the number of instance of a class """
         args = split(arg)
-
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] in self.all_classes:
@@ -175,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
             for instance in all_obj.values():
                 if instance.__class__.__name__ == args[0]:
                     count += 1
-            print(count)
+            print(count) 
 
 
 if __name__ == '__main__':
