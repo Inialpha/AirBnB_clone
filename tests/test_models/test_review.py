@@ -26,6 +26,15 @@ class TestReview(unittest.TestCase):
         self.assertTrue(type(self.my_review.user_id), str)
         self.assertTrue(type(self.my_review.text), str)
 
+    def test_none(self):
+        """ Testing for None """
+        self.my_review.place_id = None
+        self.my_review.user_id = None
+        self.my_review.text = None
+        self.assertEqual(self.my_review.text, None)
+        self.assertEqual(self.my_review.user_id, None)
+        self.assertEqual(self.my_review.text, None)
+
     def test_review_attribute(self):
         """ Testing class attribute if has attribute """
         self.my_review.place_id = self.my_place.id
