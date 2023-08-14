@@ -113,7 +113,6 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates an instance based on the
         class name and id by adding or updating attribute"""
-
         args = split(arg)
         if len(args) == 0:
             print("** class name missing **")
@@ -151,15 +150,12 @@ class HBNBCommand(cmd.Cmd):
                 a_id = args[0].strip()
                 new_line = cmd + " " + a_class + " " + a_id
                 if len(args) > 1:
-                    print(a_id)
                     others = args[1:]
                     s = ""
                     for c in others:
                         s += c
                     s = s.replace("\"", "")
-                    print(s)
                     new_line = cmd + " " + a_class + " " + a_id + " " + s
-
             return str(new_line)
         return line
 
