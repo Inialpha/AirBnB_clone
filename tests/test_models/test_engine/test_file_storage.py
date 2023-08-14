@@ -77,6 +77,12 @@ class TestFileStorage(unittest.TestCase):
             self.assertTrue(inst, dict)
             self.assertTrue(os.path.isfile('file.json'))
 
+    def test_reload_method(self):
+        """ a method that test reload method """
+        self.storage = FileStorage()
+        self.storage.reload()
+        self.assertIsNotNone(self.storage)
+
 
 if __name__ == '__main__':
     unittest.main()
