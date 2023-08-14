@@ -11,7 +11,7 @@ from models.place import Place
 from models.review import Review
 
 
-class TestChildClass(unittest.TestCase):
+class TestCity(unittest.TestCase):
     """ testing child class """
     my_user = User()
     my_city = City()
