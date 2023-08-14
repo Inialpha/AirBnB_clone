@@ -31,6 +31,13 @@ class TestUser(unittest.TestCase):
         self.assertIsNotNone(self.my_user.id)
         self.assertIsInstance(self.my_user.id, str)
 
+    def test_types(self):
+        """ test type attribute """
+        self.assertEqual(type(self.my_user.password), str)
+        self.assertEqual(type(self.my_user.first_name), str)
+        self.assertEqual(type(self.my_user.email), str)
+        self.assertEqual(type(self.my_user.last_name), str)
+
     def test_created_at(self):
         """test the created_at instance attribute"""
         self.assertIsNotNone(self.my_user.created_at)
