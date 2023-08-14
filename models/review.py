@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""module for the City class"""
+"""module for the Review class"""
+
 from models.base_model import BaseModel
 
 
@@ -10,7 +11,6 @@ class Review(BaseModel):
             user_id: a attribute that store user_id
             text: an attribute that stores review of clients
     """
-
-    place_id = ""
-    user_id = ""
-    text = ""
+    place_id = None
+    user_id = None
+    text = None
