@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" a test file for Review class """
+""" a module that test Review class """
 
 
 import unittest
@@ -11,7 +11,10 @@ from models.review import Review
 
 
 class TestReview(unittest.TestCase):
-    """ testing child class """
+    """ Testing Review class for the added functionalities
+        Check for class attributes and other methods
+    """
+
     def setUp(self):
         self.my_user = User()
         self.my_review = Review()
