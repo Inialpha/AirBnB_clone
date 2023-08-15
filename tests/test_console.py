@@ -7,9 +7,9 @@ from io import StringIO
 import unittest
 from console import HBNBCommand
 
+
 class TestHBNBCommand(unittest.TestCase):
     """Testing all the implemented functionality in console"""
-    
     def setUp(self):
         """Setting up the console"""
         self.fake_stdout = StringIO()
@@ -20,7 +20,13 @@ class TestHBNBCommand(unittest.TestCase):
         """Test quit command"""
         HBNBCommand().onecmd("quit")
         output = self.fake_stdout.getvalue()
-        self.assertIsNotNone(output)
+        assert "" in output
+
+    def test_help_command(self):
+        """ Test help command """
+        HBNBCommand().onecmd("help")
+        output = self.fake_stdout.getvalue()
+        assert "Documented commands (type help <topic>):" in output
 
     def tearDown(self):
         """Tear down the console"""
