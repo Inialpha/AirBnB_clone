@@ -11,7 +11,10 @@ import os
 
 
 class TestFileStorage(unittest.TestCase):
-    """ Test Class for FileStorage """
+    """Test Class for FileStorage that Tests all the method like
+        new_storage
+        reload method etc
+    """
 
     def setUp(self):
         """ setting up the storage file in init """
@@ -68,7 +71,7 @@ class TestFileStorage(unittest.TestCase):
             return False
 
     def test_reload(self):
-        """ a method that test reload functionality """
+        """a method that test reload functionality """
         objs = self.storage.all()
         for obj in objs.keys():
             inst = objs[obj]
