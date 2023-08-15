@@ -113,16 +113,36 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates an instance based on the
         class name and id by adding or updating attribute"""
-        args = split(arg)
+        chk = split(arg)
+        if len(chk) > 4:
+            args = arg.split(' ', 2)
+            args[1] = args[1].replace("'", '')
+            args[2] = args[2].strip()
+            args[2] = args[2].replace("' ", "', ")
+        else:
+            args = split(arg)
         if len(args) == 0:
             print("** class name missing **")
         elif len(args) == 1:
             print("** instance id missing **")
         elif len(args) == 2:
             print("** attribute name missing **")
-        elif len(args) == 3:
-            print("** value missing **")
-        elif args[0] in self.all_classes:
+        elif args[0] in self.all_classes and len(args) == 3:
+            key = args[0] + '.' + args[1]
+            my_dict = models.storage.all()
+            if key in my_dict:
+                new_dict = eval(args[2])
+                for attr, value in new_dict.items():
+                    if hasattr(my_dict[key], attr):
+                        attr_type = type(getattr(my_dict[key], attr))
+                        value = attr_type(value)
+                        setattr(my_dict[key], attr, value)
+                    else:
+                        setattr(my_dict[key], attr, value)
+                my_dict[key].save()
+            else:
+                print("** attribute value missing **")
+        elif args[0] in self.all_classes and len(args) == 4:
             key = args[0] + "." + args[1]
             my_dict = models.storage.all()
             if key in my_dict:
