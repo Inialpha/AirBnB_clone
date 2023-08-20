@@ -1,0 +1,11 @@
+body {
+	border: none;
+	padding: none;
+	color: #484848;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+.container{
+	margin: 30px auto;
+	max-width: 1000px;
+}
